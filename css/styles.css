@@ -1,0 +1,1402 @@
+/*======================================
+    Google Fonts & Custom Font
+========================================*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@font-face {
+    font-family: 'SolaimanLipi';
+    src: url('../fonts/SolaimanLipi.ttf') format('truetype');
+}
+
+/*======================================
+    Root Variables
+========================================*/
+:root {
+    --primary-color: rgb(97, 218, 251);
+    /* Cyan Blue */
+    --primary-color-rgb-values: 97, 218, 251;
+    /* RGB values for primary color */
+    --secondary-color: #FFD700;
+    /* Rich Gold */
+    --background-color: #0A0A0A;
+    /* Softer Black */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-light: #F5F5F5;
+    --text-muted: #A9A9A9;
+    --card-bg: rgba(22, 22, 22, 0.7);
+
+    --font-heading: 'Poppins', sans-serif;
+    /* --font-body: 'Roboto', sans-serif; */
+    --sidebar-width: 18rem;
+    --sidebar-collapsed-width: 6rem;
+
+    --font-body: 'Roboto', sans-serif;
+    --font-bengali: 'SolaimanLipi', sans-serif;
+
+    --transition-speed: 0.4s;
+}
+
+/*======================================
+    Global Styles & Background
+========================================*/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+body {
+    word-break: break-word;
+    /* Ensure long words break and wrap */
+    font-family: var(--font-body);
+    background-color: var(--background-color);
+    color: var(--text-light);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow: hidden;
+    cursor: auto;
+    /* Reverted to default cursor */
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    transition: margin-left var(--transition-speed) ease;
+}
+
+.main-content.collapsed {
+    margin-left: var(--sidebar-collapsed-width);
+}
+
+.container-fluid {
+    position: relative;
+    z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    color: var(--text-light);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 5rem;
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    position: relative;
+    padding-bottom: 1.5rem;
+    text-transform: uppercase;
+    overflow: hidden;
+    /* Prevents ::after animation from causing overflow */
+}
+
+
+
+p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.subheading {
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.lead {
+    font-family: var(--font-bengali);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text-light);
+}
+
+hr.m-0 {
+    border: none;
+    height: 1px;
+    background: var(--glass-border);
+}
+
+
+
+/*======================================
+    New Collapsible Sidebar
+========================================*/
+.sidebar {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-right: 4px solid transparent;
+    /* Changed border width */
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: width var(--transition-speed) ease;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all var(--transition-speed) ease;
+}
+
+.profile-container {
+    text-align: center;
+}
+
+.profile-frame {
+    position: relative;
+    display: flex;
+    /* Use flexbox to center content */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    border-radius: 50%;
+    padding: 5px;
+    /* Space between the image and the frame border */
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    /* Gradient border effect */
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 1rem;
+    /* Add some space below the frame */
+    width: 11rem;
+    /* Set fixed width */
+    height: 11rem;
+    /* Set fixed height to match width */
+    overflow: hidden;
+    /* Ensure anything outside the circle is clipped */
+    margin: 0 auto;
+    /* Add this line to center horizontally */
+}
+
+.profile-frame .img-profile {
+    width: 100%;
+    /* Make image fill the frame */
+    height: 100%;
+    /* Make image fill the frame */
+    object-fit: cover;
+    /* Crop image to fill, maintaining aspect ratio */
+    border: none;
+    border-radius: 50%;
+    box-shadow: none;
+    animation: none;
+    max-width: none;
+    /* Remove max-width if already handled by width: 100% */
+}
+
+.profile-frame:hover {
+    transform: scale(1.05);
+}
+
+.sidebar .img-profile {
+    max-width: 10rem;
+    border: none;
+    border-radius: 50%;
+    box-shadow: none;
+    transition: none;
+    animation: none;
+}
+
+.sidebar .img-profile:hover {
+    transform: none;
+    border-color: transparent;
+}
+
+.toggle-btn {
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease, right 0.4s ease;
+    z-index: 10;
+}
+
+.toggle-btn .icon-expand {
+    display: none;
+}
+
+.toggle-btn i {
+    transition: transform 0.4s ease;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    /* Adjusted to move menu higher */
+    /* Removed margin: auto 0; and flex-grow: 1; for top alignment */
+    display: flex;
+    flex-direction: column;
+    /* Removed justify-content: center; */
+}
+
+.sidebar-menu .nav-link {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 1.1rem;
+    /* Slightly smaller font */
+    padding: 0.25rem 2rem;
+    /* Reduced vertical padding */
+    color: var(--text-muted);
+    position: relative;
+    text-align: left;
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all 0.3s ease-out;
+}
+
+.sidebar-menu .nav-link:hover,
+.sidebar-menu .nav-link.active {
+    color: var(--text-light);
+    transform: scale(1.05);
+}
+
+.nav-icon {
+    margin-right: 0.5rem;
+    font-size: 1.1em;
+    width: 20px;
+    text-align: center;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.sidebar-menu .nav-link:hover .nav-icon,
+.sidebar-menu .nav-link.active .nav-icon {
+    color: var(--secondary-color);
+}
+
+.sidebar-footer {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* --- Collapsed State --- */
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed-width);
+}
+
+.sidebar.collapsed .toggle-btn .icon-collapse {
+    display: none;
+}
+
+.sidebar.collapsed .toggle-btn .icon-expand {
+    display: inline-block;
+}
+
+.sidebar.collapsed .profile-name,
+.sidebar.collapsed .profile-title,
+.sidebar.collapsed .btn-cv,
+.sidebar.collapsed .sidebar-menu span,
+.sidebar.collapsed .sidebar-footer span {
+    opacity: 0;
+    display: none;
+}
+
+.sidebar.collapsed .profile-frame {
+    display: none;
+}
+
+.sidebar.collapsed .sidebar-divider {
+    display: none;
+}
+
+.sidebar.collapsed .sidebar-header {
+    justify-content: center;
+}
+
+.sidebar.collapsed .sidebar-menu {
+    margin: auto 0;
+}
+
+.sidebar.collapsed .sidebar-menu .nav-link {
+    display: flex;
+    justify-content: center;
+    padding: 0.9rem 0;
+    text-align: center;
+}
+
+.sidebar.collapsed .nav-icon {
+    margin-right: 0;
+}
+
+.sidebar.collapsed .sidebar-footer {
+    align-items: center;
+}
+
+.sidebar.collapsed .btn-cv,
+.sidebar.collapsed .btn-secondary {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*======================================
+    Mobile Navigation & Overlay
+========================================*/
+.mobile-toggle-btn {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+    /* Above sidebar */
+    width: 50px;
+    height: 50px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--glass-border);
+    color: var(--text-light);
+    font-size: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.main-content-overlay {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    /* Below sidebar, above content */
+}
+
+.main-content-overlay.active {
+    display: block;
+}
+
+
+/*======================================
+    Buttons
+========================================*/
+.btn-primary,
+.btn-secondary {
+    /* ... (same as before) ... */
+}
+
+/*======================================
+    Content Sections
+========================================*/
+.resume-section {
+    padding: 6rem 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#education.resume-section {
+    min-height: auto;
+    padding-top: 3rem;
+    /* Further reduced padding */
+    padding-bottom: 3rem;
+    /* Further reduced padding */
+}
+
+#education h2 {
+    margin-bottom: 2.5rem;
+    font-size: 2.5rem;
+}
+
+.resume-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/*======================================
+    About Section
+========================================*/
+/*======================================
+    Social Icons
+========================================*/
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    /* Ensure minimum width */
+    min-height: 55px;
+    /* Ensure minimum height */
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: all var(--transition-speed) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    flex-shrink: 0;
+}
+
+.social-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent);
+    transition: left var(--transition-speed);
+    z-index: -1;
+}
+
+.social-icon:hover {
+    transform: translateY(-8px) scale(1.1);
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+}
+
+.social-icon:hover::before {
+    left: 100%;
+}
+
+.social-icon i {
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover i {
+    transform: scale(1.1);
+}
+
+/*======================================
+    Contact Section Specifics
+========================================*/
+#contact .card-item p.lead {
+    font-family: var(--font-body);
+    /* Override bengali font for lead paragraph */
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.contact-info-item a {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+#contact .social-icons {
+    justify-content: center;
+}
+
+
+
+/*======================================
+    Card Style (Skills, Services)
+========================================*/
+.card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2rem;
+    perspective: 1500px;
+    /* Perspective for portfolio items */
+    width: 100%;
+}
+
+.card-item {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 15px;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(5px);
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    overflow: hidden;
+    flex: 1 1 300px;
+    max-width: 420px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 769px) {
+    .card-item {
+        padding: 1rem;
+        /* Reduced padding for larger screens */
+        /* max-width: 380px; Removed max-width */
+        /* text-align: center; This should now be in the base .card-item */
+    }
+}
+
+.card-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px rgba(0, 168, 255, 0.3);
+    border-color: var(--primary-color);
+}
+
+/*======================================
+    Portfolio Section - High Tech Redesign
+========================================*/
+/* .portfolio-item { max-width: 700px; } */
+/* Removed as it's now handled by .portfolio-card and Bootstrap grid */
+.portfolio-item {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s ease, border-color 0.5s ease;
+    will-change: transform, box-shadow;
+}
+
+.portfolio-item {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+    box-shadow: 0 15px 40px rgba(var(--primary-color-rgb-values), 0.4);
+    /* Enhanced shadow with primary color */
+    border: 1px solid var(--primary-color);
+    /* Subtle border on hover */
+}
+
+.portfolio-item .card-content-wrapper {
+    /* New wrapper for content inside card */
+    padding: 2.5rem;
+    position: relative;
+    z-index: 2;
+    /* Ensure content is above the glow effect */
+}
+
+.portfolio-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--mouse-x) var(--mouse-y),
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0) 25%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    /* Glow effect should be behind content */
+}
+
+.portfolio-item:hover::before {
+    opacity: 1;
+}
+
+.portfolio-item a {
+    display: block;
+    overflow: hidden;
+    border-radius: 15px 15px 0 0;
+    margin: -2.5rem -2.5rem 1.5rem;
+    /* Stretch image */
+}
+
+.portfolio-item img {
+    transition: transform var(--transition-speed) ease;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1);
+}
+
+.portfolio-caption {
+    padding: 0 2.5rem 2.5rem;
+    margin-top: -1.5rem;
+}
+
+/* Adjusted padding */
+.portfolio-caption h4 {
+    color: var(--text-light);
+}
+
+
+/*======================================
+    Education Timeline
+========================================*/
+.education-timeline {
+    position: relative;
+    margin: 0 auto;
+}
+
+.education-timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--glass-border);
+    top: 0;
+    bottom: 0;
+    left: 30px;
+    margin-left: -2px;
+    z-index: 0;
+}
+
+.education-item {
+    padding: 10px 0 20px 60px;
+    position: relative;
+    width: 100%;
+}
+
+.education-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 21px;
+    background-color: var(--primary-color);
+    border: 3px solid var(--secondary-color);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.education-content {
+    padding: 15px;
+    background-color: var(--card-bg);
+    border-radius: 6px;
+    border: 1px solid var(--glass-border);
+    display: block;
+    /* Ensure cards are equal width */
+    transition: transform 0.3s ease-in-out;
+}
+
+.education-item:hover .education-content {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px rgba(0, 168, 255, 0.3);
+    border-color: var(--primary-color);
+}
+
+.education-content h3,
+.education-content .subheading,
+.education-content .meta {
+    /* Removed white-space: nowrap to allow natural text wrapping */
+}
+
+.card-item h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    /* Further reduced font size */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-item .subheading {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    /* Reduced font size */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-item .meta {
+    font-size: 0.75rem;
+    /* Reduced font size */
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/*======================================
+    Responsive Styles
+========================================*/
+@media (max-width: 991.98px) {
+    .sidebar {
+        width: 80%;
+        max-width: 280px;
+        /* A fixed width for the slide-in menu */
+        transform: translateX(-100%);
+        transition: transform var(--transition-speed) ease;
+        z-index: 1002;
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+
+    /* Override the collapsed state styles that force icons-only view */
+    .sidebar .profile-name,
+    .sidebar .profile-title,
+    .sidebar .btn-cv,
+    .sidebar .sidebar-menu span,
+    .sidebar .sidebar-footer span {
+        opacity: 1;
+        display: inline-block;
+        /* Or flex/block as appropriate */
+    }
+
+    .sidebar .img-profile {
+        max-width: 8rem;
+        /* Restore a reasonable size */
+        display: inline-block;
+    }
+
+    .sidebar .profile-frame {
+        width: 9rem;
+        height: 9rem;
+    }
+
+    .sidebar.collapsed .profile-frame {
+        display: flex;
+        /* Re-display frame on mobile */
+    }
+
+    .sidebar.collapsed .img-profile {
+        display: inline-block;
+        /* Ensure profile image is visible on mobile even if collapsed on desktop */
+    }
+
+    .sidebar .sidebar-menu .nav-link {
+        justify-content: flex-start;
+        /* Align text to the left */
+        padding: 0.28rem 2rem;
+    }
+
+    .sidebar .nav-icon {
+        margin-right: 0.5rem;
+        /* Restore margin */
+    }
+
+    .sidebar .sidebar-header {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 0;
+        /* Remove bottom padding to eliminate space */
+    }
+
+    .sidebar .sidebar-footer {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sidebar .btn-cv,
+    .sidebar .btn-secondary {
+        /* Revert button styles from collapsed state */
+        width: auto;
+        height: auto;
+        border-radius: 50px;
+        padding: 12px 25px;
+        font-size: 16px;
+    }
+
+    .sidebar-footer .btn-secondary {
+        padding: 14px 28px;
+    }
+
+    .sidebar .toggle-btn {
+        display: none;
+        /* Hide desktop toggle on mobile */
+    }
+
+    .mobile-toggle-btn {
+        display: flex;
+        /* Show mobile toggle */
+    }
+
+    .main-content {
+        margin-left: 0;
+        /* Full width content */
+    }
+
+    .main-content.collapsed {
+        margin-left: 0;
+        /* Ensure it stays full width */
+    }
+
+    .sidebar-divider {
+        display: none;
+        /* Hide divider in mobile */
+    }
+
+    .profile-title {
+        margin-bottom: 0;
+        /* Remove bottom margin from profile title */
+    }
+
+    .sidebar-menu {
+        margin-top: 20px;
+        /* Set exactly 20px space between profile title and menu */
+    }
+
+    .live-text-container {
+        display: none !important;
+    }
+
+    .resume-section {
+        padding: 4rem 0;
+        min-height: auto;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.2rem;
+    }
+
+    /* Contact details adjustments for mobile */
+    .contact-details-main {
+        flex-direction: column;
+    }
+
+    .contact-link-main {
+        white-space: nowrap;
+        /* Prevent text from wrapping */
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .contact-separator {
+        display: none;
+        /* Hide the separator on mobile */
+    }
+
+    .contact-icon-main {
+        margin-right: 8px;
+        /* Add space between icon and text */
+    }
+
+    .footer-contact-info a i {
+        margin-right: 8px;
+        /* Add space between icon and text in footer on mobile */
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Ensure card items themselves are responsive */
+    .card-item {
+        flex: 1 1 100%;
+        /* Take full width on small screens */
+        max-width: 100%;
+    }
+
+    /* Education specific overrides from previous timeline structure, no longer relevant to card-grid */
+    .education-timeline::after {
+        display: none;
+        /* Hide timeline line */
+    }
+
+    .education-item {
+        padding-left: 15px;
+        /* Adjust padding for card layout */
+        padding-right: 15px;
+        width: 100%;
+    }
+
+    .education-item::after {
+        display: none;
+        /* Hide timeline circles */
+    }
+
+    /* Font size adjustments for education cards */
+    .card-item h3 {
+        font-size: 1rem;
+        /* Adjust as needed for single line */
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .card-item .subheading {
+        font-size: 0.85rem;
+        /* Adjust as needed for single line */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .card-item .meta {
+        font-size: 0.75rem;
+        /* Adjust as needed for single line */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media (max-width: 576px) {
+    .footer-section p span {
+        display: none;
+        /* Hide the "Crafting seamless web experiences" text on very small screens */
+    }
+
+
+
+    .footer-social-icons {
+        justify-content: center;
+        /* Center social icons */
+        gap: 0.8rem;
+        /* Adjust gap for smaller screens */
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    /* Further font size adjustments for very small screens */
+    .card-item h3 {
+        font-size: 0.9rem;
+    }
+
+    .card-item .subheading {
+        font-size: 0.75rem;
+    }
+
+    .card-item .meta {
+        font-size: 0.65rem;
+    }
+}
+
+/* Duplicated classes from previous versions, ensure they are here or removed */
+.btn-primary:hover,
+.btn-secondary:hover {
+    transform: translateY(-2px);
+}
+
+.card-item .icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    display: block;
+    text-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+}
+
+.card-item h4 {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.card-item p {
+    font-family: var(--font-bengali);
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    flex-grow: 1;
+}
+
+/* Final cleanup of selectors that might conflict */
+.btn-primary,
+.btn-secondary,
+.navbar-toggler,
+.navbar-toggler-icon,
+.js-scroll-trigger {
+    /* Re-pasting some properties to ensure they are not lost in merge */
+    position: relative;
+}
+
+/*======================================
+    Profile High-End Look
+========================================*/
+
+.profile-name {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: -webkit-linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.profile-title {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 0;
+}
+
+.profile-divider {
+    margin: 1rem 1.5rem;
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
+}
+
+
+
+@keyframes pulse-profile {
+    0% {
+        box-shadow: 0 0 25px rgba(97, 218, 251, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 45px rgba(97, 218, 251, 0.8);
+    }
+
+    100% {
+        box-shadow: 0 0 25px rgba(97, 218, 251, 0.4);
+    }
+}
+
+.btn-cv {
+    background: var(--glass-bg);
+    border: none;
+    color: var(--text-light);
+    padding: 12px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 1rem 0 0;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    z-index: 1;
+}
+
+.btn-cv::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: -2px;
+    /* Same as border width */
+    border-radius: inherit;
+    /* Inherit from parent */
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    /* animation: rotate-gradient 4s linear infinite; */
+}
+
+.btn-cv:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 168, 255, 0.5);
+}
+
+/* New CV Download Link Style */
+.cv-download-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    display: inline-block;
+    margin-top: 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.cv-download-link i {
+    margin-right: 4px;
+}
+
+.cv-download-link:hover {
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.sidebar.collapsed .cv-download-link {
+    font-size: 1.5em !important;
+    /* Make icon bigger than text */
+    margin-top: 0.5rem;
+}
+
+.sidebar.collapsed .cv-download-link span {
+    display: none;
+    /* Hide text in collapsed desktop sidebar */
+}
+
+/*======================================
+
+    WhatsApp Button Style
+
+========================================*/
+
+@keyframes pulse-whatsapp {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.whatsapp-colored-icon {
+    color: #25D366 !important;
+    /* Force WhatsApp green */
+    display: inline-block;
+    /* Ensures transform property works correctly */
+    animation: pulse-whatsapp 1.5s infinite;
+}
+
+.sidebar-menu .nav-link:hover .whatsapp-colored-icon {
+    color: #25D366 !important;
+    /* Keep green on hover */
+}
+
+/* New rule added for resume-section-content to ensure full width */
+.resume-section-content {
+    width: 100%;
+}
+
+/*======================================
+    New Compact Footer Design
+========================================*/
+.footer-section {
+    background-color: #0A0A0A;
+    padding: 1.5rem 15px;
+    /* Reduced padding */
+    border-top: 1px solid var(--glass-border);
+    margin-left: var(--sidebar-width);
+    transition: margin-left var(--transition-speed) ease;
+}
+
+.footer-section.collapsed {
+    margin-left: var(--sidebar-collapsed-width);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    /* Allow wrapping for mobile */
+    gap: 1.5rem;
+    /* Add gap for mobile */
+}
+
+.footer-left {
+    text-align: left;
+}
+
+.footer-center {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-copyright {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+    /* Reduced margin */
+    margin-top: 0;
+}
+
+.footer-copyright a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.footer-copyright a:hover {
+    color: var(--secondary-color);
+}
+
+.footer-tagline {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.footer-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    color: var(--text-muted);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 168, 255, 0.2);
+}
+
+.footer-link.back-to-top {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.footer-link.back-to-top:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* Debugging Portfolio Grid */
+@media (min-width: 768px) {
+    #portfolio .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    #portfolio .col-lg-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+
+/* Responsive */
+@media (max-width: 991.98px) {
+
+    .footer-section,
+    .footer-section.collapsed {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        /* Stack elements vertically */
+        text-align: center;
+    }
+
+    .footer-left,
+    .footer-right {
+        text-align: center;
+    }
+
+    .footer-center {
+        order: -1;
+        /* Move social icons to the top on mobile */
+    }
+}
