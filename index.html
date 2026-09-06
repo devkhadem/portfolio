@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Khademul Islam - Elementor and WooCommerce Portfolio" />
+    <meta name="author" content="Khademul Islam" />
+    <title>Khademul Islam - Elementor &amp; WooCommerce Specialist</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        /*styles*/
+        #portfolio .row {
+            align-items: stretch;
+        }
+
+        .portfolio-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            margin-bottom: 2rem;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 100%;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .portfolio-img-wrapper {
+            padding: 15px;
+            /* Added padding to visually shrink the image frame */
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            /* A subtle background for the frame */
+            border-radius: 15px 15px 0 0;
+            /* Matches the card's border-radius */
+            overflow: hidden;
+            /* To prevent anything from going outside the frame */
+            aspect-ratio: 16 / 9;
+            /* Sets a specific ratio for the frame */
+            display: flex;
+            /* To center the image */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .portfolio-img-wrapper img {
+            transition: transform 0.4s ease;
+            object-fit: contain;
+            object-fit: cover;
+            /* Ensures the entire image is visible within the frame */
+            width: 100%;
+            /* Uses the full width inside the padding */
+            height: 100%;
+            /* Uses the full height inside the padding */
+        }
+
+        .portfolio-card:hover .portfolio-img-wrapper img {
+            transform: scale(1.05);
+            /* Subtle zoom effect that won't crop the image */
+        }
+
+        .portfolio-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: #fff;
+            padding: 40px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .portfolio-card:hover .portfolio-content {
+            transform: translateY(0);
+        }
+
+        /* Portfolio Action Buttons */
+        .portfolio-links {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-live-demo {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 25px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            color: var(--text-light);
+            font-size: 0.7rem;
+            /* Text size */
+            font-weight: 600;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        /* New CSS for the bigger icon */
+        .btn-live-demo .big-icon {
+            font-size: 1rem !important;
+            margin-right: 10px;
+            color: var(--primary-color) !important;
+            line-height: 1;
+            transition: color 0.3s ease !important;
+        }
+
+        .btn-live-demo:hover {
+            background: rgba(0, 0, 0, 1) !important;
+            border-color: rgba(0, 0, 0, 1) !important;
+            border: 2px solid rgb(0, 0, 0) !important;
+            color: rgb(255, 255, 255) !important;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+            transform: translateY(-3px) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .portfolio-links .btn-live-demo:hover .big-icon,
+        .portfolio-links .btn-live-demo:hover i,
+        .btn-live-demo:hover .big-icon,
+        .btn-live-demo:hover i {
+            color: #ffffff !important;
+            fill: #ffffff !important;
+        }
+
+        /* Override Font Awesome icon color on hover */
+        .btn-live-demo:hover .fa-arrow-up-right-from-square {
+            color: #ffffff !important;
+        }
+        
+        /* Ultra aggressive rule to overcome Font Awesome specificity */
+        .btn-live-demo:hover .fas.big-icon::before,
+        .btn-live-demo:hover .fa-arrow-up-right-from-square::before {
+            color: #ffffff !important;
+        }
+        
+        /* Class-based hover state */
+        .btn-live-demo.hover-state i,
+        .btn-live-demo.hover-state .big-icon {
+            color: #ffffff !important;
+            fill: #ffffff !important;
+        }
+
+        /* To remove the glow effect from the profile picture */
+
+        /* Sidebar Divider */
+        .sidebar-divider {
+            margin: 1rem 1.5rem;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        /* Sophisticated lead text for About section */
+        #about .lead {
+            font-size: 1.15rem;
+            /* A refined font size */
+            font-weight: 300;
+            /* An elegant, light font weight */
+            line-height: 1.8;
+            /* Improved line spacing for readability */
+            letter-spacing: 0.5px;
+            /* Subtle spacing for a premium feel */
+            color: rgba(255, 255, 255, 0.8);
+            /* Softer text color */
+            max-width: 720px;
+            /* Optimal line length for reading comfort */
+        }
+    </style>
+
+</head>
+
+<body id="page-top">
+    <div id="particles-js"></div>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sideNav">
+        <div class="sidebar-header">
+            <div class="profile-container">
+                <div class="profile-frame">
+                    <img class="img-profile" src="assets/img/profile.jpeg" alt="Khademul Islam's Profile Picture" />
+                </div>
+                <a class="profile-name" href="#about" aria-label="Go to hero section">
+                    <i class="fab fa-wordpress" aria-hidden="true"></i><span> &nbsp;Dev Khadem</span>
+                </a>
+                <p class="profile-title">Elementor <span>And</span> WooCommerce Specialist</p>
+                <hr class="profile-divider">
+                <!-- <a class="cv-download-link" href="cv/Web_Developer_Khademul_Islam_CV.pdf" download>
+                        <i class="fa-solid fa-cloud-arrow-down"></i> &nbsp; <span>Download CV</span>
+                    </a> -->
+            </div>
+            <button class="toggle-btn" aria-label="Toggle Sidebar">
+                <i class="fa-solid fa-chevron-left icon-collapse"></i>
+                <i class="fa-solid fa-chevron-right icon-expand"></i>
+            </button>
+        </div>
+        <hr class="sidebar-divider">
+        <ul class="sidebar-menu">
+            <li><a class="nav-link js-scroll-trigger" href="#about"><i
+                        class="fas fa-user-alt nav-icon"></i><span>About</span></a></li>
+            <li><a class="nav-link js-scroll-trigger" href="#skills"><i
+                        class="fab fa-wordpress nav-icon"></i><span>Skills</span></a></li>
+            <li><a class="nav-link js-scroll-trigger" href="#services"><i
+                        class="fas fa-cogs nav-icon"></i><span>Services</span></a></li>
+            <li><a class="nav-link js-scroll-trigger" href="#portfolio"><i
+                        class="fas fa-briefcase nav-icon"></i><span>Portfolio</span></a></li>
+            <li><a class="nav-link nav-link-cta js-scroll-trigger" href="#contact"><i
+                        class="fas fa-envelope nav-icon"></i><span>Contact</span></a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <!-- Footer content can go here if needed in the future -->
+        </div>
+    </nav>
+
+    <!-- Page Content-->
+    <main class="main-content">
+        <button class="mobile-toggle-btn" id="mobile-toggle-btn" aria-label="Toggle Menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="container-fluid">
+            <!-- About / Hero -->
+            <section class="resume-section hero-section" id="about">
+                <div class="resume-section-content">
+                    <div class="about-layout">
+                        <div class="hero-visual">
+                            <div class="hero-orbit hero-orbit-one"></div>
+                            <div class="hero-orbit hero-orbit-two"></div>
+                            <div class="about-photo">
+                                <img src="assets/img/profile.jpeg" alt="Khademul Islam, professional headshot" />
+                            </div>
+                        </div>
+                        <div class="about-copy">
+                            <p class="lead mb-5">Hi, I'm Khadimul Islam, a professional WordPress Developer specializing in Elementor & WooCommerce, with foundational knowledge of HTML5, CSS3, JavaScript, PHP, and Canva. I build fast, fully responsive websites and e-commerce stores tailored to business needs. Having trained at Dreamland IT Institute alongside my graduation, I focus on turning ideas into clean, easy-to-manage, and user-friendly digital experiences from concept to launch.
+                            <div class="hero-actions">
+                                <a class="hero-action-primary" href="#portfolio">View my work <i class="fas fa-arrow-right"></i></a>
+                                <a class="hero-action-secondary" href="#contact">Let&rsquo;s talk</a>
+                                <a class="hero-action-secondary" href="cv/Wordpress_Developer_Khademul_Islam_CV.pdf"
+                                    download="Khadimul-Islam-CV.pdf">
+                                    Download CV <i class="fas fa-download"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="m-0" />
+            </section>
+
+            <!-- Skills Section -->
+            <section class="resume-section" id="skills">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">My Skills &amp; Expertise</h2>
+                    <div class="card-grid">
+                        <div class="card-item">
+                            <i class="icon fab fa-wordpress"></i>
+                            <h4>WordPress</h4>
+                            <p>Website setup | Content management | Responsive development</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="icon fas fa-paint-brush"></i>
+                            <h4>Elementor</h4>
+                            <p>Page building | Landing pages | Mobile-first layouts</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="icon fas fa-shopping-cart"></i>
+                            <h4>WooCommerce</h4>
+                            <p>Product setup | Cart and checkout | Store customization</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="icon fas fa-sliders-h"></i>
+                            <h4>Theme &amp; Plugin Customization</h4>
+                            <p>Theme styling | Plugin configuration | Custom WordPress solutions</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="icon fas fa-code"></i>
+                            <h4>Web Development</h4>
+                            <p>HTML5 | CSS3 | JavaScript ES6+ | PHP | Custom CSS</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="icon fas fa-palette"></i>
+                            <h4>Canva</h4>
+                            <p>Social graphics | Website visuals | Branded content</p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="m-0" />
+            </section>
+            <!-- Services Section -->
+            <section class="resume-section" id="services">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">What I Can Build</h2>
+                    <div class="card-grid">
+                        <div class="card-item">
+                            <i class="icon fas fa-pencil-ruler"></i>
+                            <h4>Elementor Websites</h4>
+                            <p>Professional, responsive websites designed and built in Elementor for easy editing.
+                            </p>
+                        </div>
+                        <div class="card-item">
+                            <i class="icon fas fa-mobile-alt"></i>
+                            <h4>WooCommerce Stores</h4>
+                            <p>Conversion-focused product pages, shopping experiences, and checkout flows for online shops.</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="icon fas fa-headset"></i>
+                            <h4>Store Setup &amp; Support</h4>
+                            <p>Product uploads, payment setup and store configuration.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="m-0" />
+            </section>
+            <!-- Portfolio Section -->
+            <section class="resume-section" id="portfolio">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Selected Projects</h2>
+                    <div class="container-fluid px-0">
+                        <div class="row justify-content-center">
+                            <!-- Portfolio Item 1 -->
+                            <div class="col-md-6 col-lg-6">
+                                <div class="portfolio-card shadow-lg">
+                                    <div class="portfolio-img-wrapper">
+                                        <img src="assets/img/portfolio/wordpressclientproject.png" class="img-fluid"
+                                            alt="Smart Guide Arena WordPress client project">
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h4 class="portfolio-title">WordPress Client Project</h4>
+                                        <div class="portfolio-links">
+                                            <a href="https://www.smartguidearena.com/" target="_blank"
+                                                rel="noopener noreferrer" class="btn-live-demo"
+                                                aria-label="View Smart Guide Arena project">
+                                                <i class="fas fa-arrow-up-right-from-square big-icon"></i> View project
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item 2 -->
+                            <div class="col-md-6 col-lg-6">
+                                <div class="portfolio-card shadow-lg">
+                                    <div class="portfolio-img-wrapper">
+                                        <img src="assets/img/portfolio/customclient project.png" class="img-fluid"
+                                            alt="Trades Portfolio Builder custom code client project">
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h4 class="portfolio-title">Custom Code Client Project</h4>
+                                        <div class="portfolio-links">
+                                            <a href="https://tradesportfoliobuilder.com/" target="_blank"
+                                                rel="noopener noreferrer" class="btn-live-demo"
+                                                aria-label="View Trades Portfolio Builder project">
+                                                <i class="fas fa-arrow-up-right-from-square big-icon"></i> View project
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item 1 -->
+                            <div class="col-md-6 col-lg-6">
+                                <div class="portfolio-card shadow-lg">
+                                    <div class="portfolio-img-wrapper">
+                                        <img src="assets/img/portfolio/samsung.png" class="img-fluid"
+                                            alt="Portfolio Image 1">
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h4 class="portfolio-title">Ecommerce Website</h4>
+                                        <div class="portfolio-links">
+                                            <a href="https://devkhadem.github.io/samsungonlinestore/" target="_blank" rel="noopener noreferrer" class="btn-live-demo"
+                                                aria-label="Live Demo">
+                                                <i class="fas fa-arrow-up-right-from-square big-icon"></i> View project
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item 2 -->
+                            <div class="col-md-6 col-lg-6">
+                                <div class="portfolio-card shadow-lg">
+                                    <div class="portfolio-img-wrapper">
+                                        <img src="assets/img/portfolio/travel.png" class="img-fluid"
+                                            alt="Portfolio Image 2">
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h4 class="portfolio-title">Agency Website</h4>
+                                        <div class="portfolio-links">
+                                            <a href="https://devkhadem.github.io/travelagency/" target="_blank" rel="noopener noreferrer" class="btn-live-demo"
+                                                aria-label="Live Demo">
+                                                <i class="fas fa-arrow-up-right-from-square big-icon"></i> View project
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item 3 -->
+                            <div class="col-md-6 col-lg-6">
+                                <div class="portfolio-card shadow-lg">
+                                    <div class="portfolio-img-wrapper">
+                                        <img src="assets/img/portfolio/trimatry.png" class="img-fluid"
+                                            alt="Portfolio Image 3">
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h4 class="portfolio-title">Business Website</h4>
+                                        <div class="portfolio-links">
+                                            <a href="https://devkhadem.github.io/trimatry" target="_blank" rel="noopener noreferrer" class="btn-live-demo"
+                                                aria-label="Live Demo">
+                                                <i class="fas fa-arrow-up-right-from-square big-icon"></i> View project
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Portfolio Item 4 -->
+                            <div class="col-md-6 col-lg-6">
+                                <div class="portfolio-card shadow-lg">
+                                    <div class="portfolio-img-wrapper">
+                                        <img src="assets/img/portfolio/blog.png" class="img-fluid"
+                                            alt="Portfolio Image 4">
+                                    </div>
+                                    <div class="portfolio-content">
+                                        <h4 class="portfolio-title">Blog Website</h4>
+                                        <div class="portfolio-links">
+                                            <a href="https://devkhadem.github.io/blog" target="_blank" rel="noopener noreferrer" class="btn-live-demo"
+                                                aria-label="Live Demo">
+                                                <i class="fas fa-arrow-up-right-from-square big-icon"></i> View project
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="m-0" />
+            </section>
+        </div>
+        <!-- Contact Section -->
+        <section class="resume-section" id="contact">
+            <div class="resume-section-content">
+                <h2 class="mb-5">Let&rsquo;s Build Your Site</h2>
+                <div class="card-grid">
+                    <div class="card-item text-center">
+                        <i class="icon fas fa-headset"></i>
+                        <h4>Get in Touch</h4>
+                        <p class="lead mb-4">Have a new site, store, or redesign in mind? Tell me what you&rsquo;re
+                            building and I&rsquo;ll help you choose the right Elementor or WooCommerce approach.</p>
+                        <div class="contact-info-item">
+                            <i class="fas fa-envelope fa-2x text-primary"></i>
+                            <a href="mailto:devkhadem&commat;gmail.com">devkhadem&commat;gmail.com</a>
+                        </div>
+                        <div class="contact-info-item mt-3">
+                            <i class="fab fa-whatsapp fa-2x text-primary"></i>
+                            <a href="https://wa.me/8801726580454" target="_blank">+88 01726580454</a>
+                        </div>
+
+                        <div class="social-icons social-icons-large mt-4">
+                            <a class="social-icon" href="https://github.com/devkhadem" target="_blank"><i
+                                    class="fab fa-github"></i></a>
+                            <a class="social-icon" href="https://x.com/devkhadem" target="_blank"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a class="social-icon" href="https://www.facebook.com/profile.php?id=61580921154240"
+                                target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <!-- <a class="social-icon" href="https://www.linkedin.com/in/khademul-islam-71a988348/"
+                                target="_blank"><i class="fab fa-linkedin-in"></i></a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="m-0" />
+        </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container-fluid footer-container">
+            <div class="footer-left">
+                <p class="footer-copyright">
+                    Built by <a href="https://github.com/devkhadem" target="_blank">Khademul Islam</a>
+                </p>
+                <p class="footer-tagline">
+                    Crafting polished Elementor websites and conversion-ready WooCommerce stores.
+                </p>
+            </div>
+
+            <div class="footer-center">
+                <a class="footer-link" href="https://github.com/devkhadem" target="_blank" aria-label="GitHub"><i
+                        class="fab fa-github"></i></a>
+                <a class="footer-link" href="https://x.com/devkhadem" target="_blank" aria-label="Twitter"><i
+                        class="fab fa-twitter"></i></a>
+                <a class="footer-link" href="https://www.facebook.com/profile.php?id=61580921154240" target="_blank"
+                    aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                 <!-- <a class="footer-link" href="https://www.linkedin.com/in/khademul-islam-71a988348/" target="_blank"
+                    aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a> -->
+            </div>
+
+            <div class="footer-right">
+                <a href="#page-top" class="footer-link back-to-top js-scroll-trigger" aria-label="Back to top"><i
+                        class="fas fa-arrow-up"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <a class="floating-whatsapp" href="https://wa.me/8801726580454" target="_blank" rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        <span>WhatsApp</span>
+    </a>
+
+    <div class="main-content-overlay" id="main-content-overlay"></div>
+
+    <div id="cursor"></div>
+    <div id="cursor-border"></div>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    
+    <!-- Portfolio button hover fix -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.btn-live-demo');
+            
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.classList.add('hover-state');
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.classList.remove('hover-state');
+                });
+                
+                // Also add :hover styles programmatically
+                btn.addEventListener('mouseenter', function() {
+                    const icons = this.querySelectorAll('i');
+                    icons.forEach(icon => {
+                        icon.style.setProperty('color', '#ffffff', 'important');
+                        icon.style.setProperty('fill', '#ffffff', 'important');
+                    });
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    const icons = this.querySelectorAll('i');
+                    icons.forEach(icon => {
+                        icon.style.removeProperty('color');
+                        icon.style.removeProperty('fill');
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
